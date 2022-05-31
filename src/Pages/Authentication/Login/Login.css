@@ -1,0 +1,57 @@
+.auth-container {
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    overflow: hidden;
+    background: #C33764;  /* fallback colour. Make sure this is just one solid colour. */
+    background: -webkit-linear-gradient(rgba(0, 0, 0, 0.8), rgba(15, 15, 15, 0.8)), url("https://wallpaperaccess.com/full/329583.jpg");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+   object-fit: cover;
+}
+
+.auth-container form{
+   background-color: white;
+   width: 20vw;
+   padding: 10px;
+   border-radius:20px;
+   display: flex;
+   flex-direction: column;
+   border-bottom: 5px solid blue;
+   border-top: 5px solid blue;
+}
+
+.auth-container form input{
+    height: 30px;
+    margin: 10px 0;
+    
+}
+
+.auth-content-container{
+    display: flex;
+    /* width: 50%; */
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+
+input[type="submit"]{
+    background-color: blue;
+    color: white;
+}
+
+@media screen and (max-width:800px)  {
+    .auth-container form{
+        width: 90vw;
+    }
+
+    .auth-container{
+        display: flex;
+        flex-direction: column;
+    }
+}
