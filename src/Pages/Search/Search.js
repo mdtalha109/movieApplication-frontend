@@ -38,7 +38,7 @@ const Search = () => {
             }
           }
     
-          const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist',config);
+          const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/public',config);
           console.log(data)
           setCreatedMovieList({createdList: data})
         }

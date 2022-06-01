@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Login from './Pages/Authentication/Login/Login';
 import { initialState, reducer } from "./reducers/userReducer.js";
@@ -36,7 +36,6 @@ const Routing = () => {
 
 function App() {
 
-  
   const [state, dispatch] = useReducer(reducer,initialState)
   return (
     <> 

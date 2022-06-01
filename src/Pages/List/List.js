@@ -15,8 +15,6 @@ const List = () => {
     const movieListName = searchParams.get('q')
 
     const [movieItemInList, setMovieItemInList] = useState({movie: []})
-
-    //getmoviebylist
     useEffect(()=> {
 
         const fetchMovieHelper = (...args) => {
@@ -31,26 +29,13 @@ const List = () => {
                 finalMovieList.push(data)
 
                 // console.log(movieItemInList.movie)
-
-                console.log(finalMovieList)
-
-       
                 setMovieItemInList({movie: [...finalMovieList]})
                 setLoading(false)
                 // console.log(movieItemInList.movie)
-      
             })
-
-           
-
             // setMovieItemInList({movie: finalMovieList})
 
             // console.log(movieItemInList.movie)
-
-            
-
-            
-            
         }
         const fetchMovieInList =  async() => {
             setLoading(true)

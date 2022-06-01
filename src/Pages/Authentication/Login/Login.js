@@ -114,9 +114,10 @@ const Login = () => {
 
             <div>
                     <form>
-                          {
+                        {
                             showLogin ? <h3>LogIn</h3> : <h3>Signup</h3>
-                          }
+                        }
+                        
                         {
                             !showLogin && <input type="text" placeholder='Enter your username' value={username} onChange={(e) => setUsername(e.target.value)}/>
                         }
@@ -127,11 +128,7 @@ const Login = () => {
                             !showLogin &&  <input type="password" placeholder='Confirm your password' value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}/>
                         }
 
-                       
-                        
                         {
-                            
-
                             showLogin ? <button onClick={loginHandler}>{loading ?'Wait' : 'Login'}</button>:<button onClick={signupHandler}>{loading ?   'Wait' : 'Signup'}</button>
                         }
                     

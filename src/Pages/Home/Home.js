@@ -58,18 +58,12 @@ const Home = () => {
           }
     
           const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/private',config);
-          console.log(data)
-          
+       
           setCreatedMovieList({createdList: data})
           fetchMovieListPublic();
           setLoadingPrivate(false);
-        }
-    
+        } 
         fetchMovieListPrivate();
-
-
-
-
     }, [])
 
     const newListHandler = async() => {
