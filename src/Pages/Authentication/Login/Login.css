@@ -39,10 +39,21 @@ img {
 
 }
 
+button{
+    background-color: blue;
+    padding: 7px;
+    color: white;
+}
+
 
 input[type="submit"]{
     background-color: blue;
     color: white;
+}
+
+.link-text{
+    color: blue;
+    cursor: pointer;
 }
 
 @media screen and (max-width:800px)  {

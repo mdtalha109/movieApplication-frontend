@@ -31,12 +31,16 @@ const Navbar = () => {
     <nav className='navbar'>
         <div><Link to='/home'>MovieApp</Link></div>
 
-        <div>
+        <div className='logout-container'>
            <button onClick={function(){
                 localStorage.clear();
                 dispatch({type: 'CLEAR'})
                 navigate('/')
-              }}>Logout ({state && state.name})</button>
+              }}
+
+              style={{backgroundColor: "white", color: 'black', borderRadius:"10px"}}
+              
+              >Logout ({state && state.name})</button>
         </div>
     </nav>
 

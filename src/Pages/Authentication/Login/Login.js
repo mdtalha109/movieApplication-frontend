@@ -1,9 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios'
 import './Login.css'
 import { userContext } from '../../../App';
 import { useNavigate } from 'react-router-dom';
+import { Spinner } from '@chakra-ui/react'
+
 // import  Spinner  from '@chakra-ui/react'
 
 const Login = () => {
@@ -11,14 +14,13 @@ const Login = () => {
 
     const navigate = useNavigate()
 
-
     const {state, dispatch} = useContext(userContext);
+
     const [showLogin, setShowLogin] = useState(true)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [username, setUsername] = useState('')
-
     const [loading, setLoading] = useState(false)
 
     useEffect(()=> {
@@ -28,7 +30,9 @@ const Login = () => {
     const loginHandler = async(e) => {
         e.preventDefault();
         if(!email || !password){
-            alert('all fields are required');
+            toast.warn('all fields are required', {
+              autoClose: 2000,
+            });
             return;
           }
       
@@ -45,17 +49,15 @@ const Login = () => {
             if(data){
               toast('Login Successfull');
               localStorage.setItem('movieApp-userInfo', JSON.stringify(data));
+
               dispatch({type: 'USER', payload:data})
-              
-              // console.log('state from login')
-              // console.log(state)
               setLoading(false)
               navigate('/home')
-
             }
       
           } catch (error) {
-            toast(error.response.data.message)
+            toast(error.response.data.message);
+            setLoading(false)
           }
     }
     
@@ -63,13 +65,15 @@ const Login = () => {
         e.preventDefault();
         
         if(!username || !email || !password || !confirmPassword){
-            alert('all field are required');
-            return;
+          toast.warn('all fields are required', {
+            autoClose: 2000,
+          });
           }
       
           if(password !== confirmPassword){
-            alert('password dont matched')
-            return
+            toast.warn('Password not matched', {
+              autoClose: 2000,
+            });
           }
 
           try {
@@ -86,6 +90,9 @@ const Login = () => {
 
             if(data){
               setLoading(false)
+              toast.success('Account created Successfully', {
+                autoClose: 2000,
+              });
                 setShowLogin(true)
                 setEmail('')
                 setPassword('')
@@ -125,13 +132,13 @@ const Login = () => {
                         {
                             
 
-                            showLogin ? <button onClick={loginHandler}>{loading ? 'Wait' : 'Login'}</button>:<button onClick={signupHandler}>{loading ? 'Wait' : 'Signup'}</button>
+                            showLogin ? <button onClick={loginHandler}>{loading ?'Wait' : 'Login'}</button>:<button onClick={signupHandler}>{loading ?   'Wait' : 'Signup'}</button>
                         }
                     
                         {
                             showLogin
-                            ? <p>Not a registered user, <span onClick={()=> setShowLogin(false)}>Create new account</span></p>
-                            : <p>Already a registered user, <span onClick={()=> setShowLogin(true)}>SignIn</span></p>
+                            ? <p>Not a registered user, <span className='link-text' onClick={()=> setShowLogin(false)}>Create new account</span></p>
+                            : <p>Already a registered user, <span className='link-text' onClick={()=> setShowLogin(true)}>SignIn</span></p>
                         }
                     </form>
                

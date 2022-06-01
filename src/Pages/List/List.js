@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import { userContext } from '../../App';
+import Loader from '../../Components/Loader/Loader';
 import MovieCard from '../../Components/MovieCard/MovieCard';
 import Navbar from '../../Components/Navbar/Navbar';
 
@@ -75,16 +76,19 @@ const List = () => {
   return (
     <>
          <Navbar/>
-         <div className='home-container-wrapper'>
-          <div className='home-container'>
-              <h1>{`Movie Added In '${movieListName}'`}</h1>
+         <div className='home-container-wrappers'>
+          <div className='home-containers'>
+              <h1 className='text-center'>{`Movie Added In '${movieListName}'`}</h1>
               
-              <div style={{display: "flex", flexWrap: "wrap"}}>
+              <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center",width:"100vw"}}>
 
-                  
                     {
                     movieItemInList &&  movieItemInList.movie.map((movie) => <MovieCard movieItem={movie}/>)
 
+                    }
+
+                    {
+                      loading &&  <Loader/>
                     }
             </div>
           </div>

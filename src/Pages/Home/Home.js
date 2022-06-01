@@ -2,6 +2,10 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { userContext } from '../../App';
+import { PhoneIcon, AddIcon, WarningIcon } from '@chakra-ui/icons'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../../Components/Loader/Loader';
 import Navbar from '../../Components/Navbar/Navbar';
 import './Home.css'
 
@@ -56,6 +60,9 @@ const Home = () => {
       const {data} = await axios.post('https://movie-app-pro.herokuapp.com/api/list/createList', {movieListName:newListName}, config)
       console.log(data.createdList.movieListName)
       setCreatedMovieList({createdList: [...createdMovieList.createdList, data.createdList]})
+      toast.success('List created successfully', {
+        autoClose: 2000,
+      });
   }
 
     const movieSearchHandler = async(e) => {
@@ -86,14 +93,12 @@ const Home = () => {
             <div className='created-movie-list'>
             <h2>Created Movie List:</h2>  <button onClick={newListHandler}>Create new List</button>
             <div className='movie-list-container'>
-             
-             
                 {
-                  loading ? <p>Wait, Loading List if you have created any</p>:
+                  loading ? <div style={{marginTop:"20px"}}><p>Loading your List</p><Loader/></div>:
                   createdMovieList && createdMovieList.createdList.map((item) => 
                   <Link to={`/list?q=${item.movieListName}`}>
                     <div className='movie-list-item'>
-                      <h3>{item.movieListName}</h3>
+                      <h3>{item.movieListName}<PhoneIcon /></h3>
                     </div>
                   </Link>
                    
@@ -101,15 +106,10 @@ const Home = () => {
                 }
               
             </div>
-            </div>
-
-            
-            
+            </div> 
           </div>
       </div>
-     
-
-
+      <ToastContainer/>
     </>
   )
 }

@@ -4,9 +4,14 @@ nav{
     color: white;
     justify-content: space-around;
     padding: 10px 0;
+    align-items: center;
 }
 
 a{
     color: white;
     text-decoration: none;
+}
+
+.logout-container > button{
+   padding: 7px;
 }
