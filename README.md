@@ -11,8 +11,8 @@ Backend Repository: https://github.com/mdtalha109/movieApplication-backend
 * Add movie to list
 
 # How to tun app locally?
-$ git clone https://github.com/mdtalha109/movieApplication-frontend
-$ cd movieApplication-backend
-$ npm install
-$ npm start:
+* $ git clone https://github.com/mdtalha109/movieApplication-frontend
+* $ cd movieApplication-backend
+* $ npm install
+* $ npm start:
 
