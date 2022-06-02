@@ -39,7 +39,7 @@ const Home = () => {
             }
           }
     
-          const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/public',config);
+          const {data} = await axios.get('http://localhost:5000/api/list/getlist/public',config);
           console.log(data)
           
           setCreatedMovieListPublic({createdListPublic: data})
@@ -57,7 +57,7 @@ const Home = () => {
             }
           }
     
-          const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/private',config);
+          const {data} = await axios.get('http://localhost:5000/api/list/getlist/private',config);
        
           setCreatedMovieList({createdList: data})
           fetchMovieListPublic();
@@ -66,7 +66,7 @@ const Home = () => {
         fetchMovieListPrivate();
     }, [])
 
-    const newListHandler = async() => {
+    const newListHandler = async(view) => {
       const newListName= prompt('Enter name of list');
       if(!newListName){
         alert('List name is required');
@@ -83,10 +83,16 @@ const Home = () => {
       toast('Wait, Creating List', {
         autoClose: 1000,
       });
-      const {data} = await axios.post('https://movie-app-pro.herokuapp.com/api/list/createList', {movieListName:newListName}, config)
-      console.log(data.createdList.movieListName)
-      setCreatedMovieList({createdList: [...createdMovieList.createdList, data.createdList]})
-      setCreatedMovieListPublic({createdListPublic: [...createdMovieListPublic.createdListPublic, data.createdList]})
+      const {data} = await axios.post('http://localhost:5000/api/list/createList', {movieListName:newListName, isPublic: view}, config)
+      console.log(data.createdList);
+
+      if(data.createdList.isPublic){
+        setCreatedMovieList({createdList: [...createdMovieList.createdList, data.createdList]})
+        setCreatedMovieListPublic({createdListPublic: [...createdMovieListPublic.createdListPublic, data.createdList]})
+      }else{
+        setCreatedMovieList({createdList: [...createdMovieList.createdList, data.createdList]})
+      }
+      
       toast.success('List created successfully', {
         autoClose: 2000,
       });
@@ -154,7 +160,7 @@ const Home = () => {
             </div>
 
             <div className='created-movie-list'>
-            <h2>Created Movie List (Private):</h2>  <button onClick={newListHandler}>Create new List</button>
+            <h2>Movie list created by you</h2>  <button onClick={()=>newListHandler(false)}>Create new Private List</button>
             <div className='movie-list-container'>
                 {
                   loadingPrivate ? <div style={{marginTop:"20px"}}><p>Loading your List</p><Loader/></div>:
@@ -175,7 +181,7 @@ const Home = () => {
               
             </div>
 
-            <h2>Created Movie List (Public):</h2>
+            <h2>Created Movie List by all user (Public):</h2> <button onClick={()=>newListHandler(true)}>Create new Public List</button>
             <div className='movie-list-container'>
                 {
                   loadingPublic ? <div style={{marginTop:"20px"}}><p>Loading Public List</p><Loader/></div>:
