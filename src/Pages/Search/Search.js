@@ -8,8 +8,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import './Search.css'
 
 const Search = () => {
-
-    
+ 
   const [movieList, setMovieList] = useState({movieListItems: []})
   const [createdMovieList, setCreatedMovieList] = useState({createdList: []})
   const [loading, setLoading]= useState(false)
@@ -23,7 +22,7 @@ const Search = () => {
 
           setLoading(true);
             const {data} = await axios.get(`https://www.omdbapi.com/?s=${searchKeyword}&apikey=fd5558af`);
-            console.log(data.Search)
+            // console.log(data.Search)
             setLoading(false);
             setMovieList({movieListItems: data.Search})
         }
@@ -37,15 +36,17 @@ const Search = () => {
                 'Authorization' : `Bearer ${state.token}`
             }
           }
-    
           const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/public',config);
-          console.log(data)
-          setCreatedMovieList({createdList: data})
+          // console.log(data)
+          const privateList = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/private',config);
+          console.log(privateList)
+
+          console.log(privateList.data)
+          // setCreatedMovieList({createdList: data})
+          setCreatedMovieList({createdList: [...data, ...privateList.data]})
         }
     
         fetchMovieList();
-
-       
     }, [])
 
     
@@ -74,17 +75,10 @@ const Search = () => {
               !loading && !movieList.movieListItems && <h1>Not found</h1>
             }
             </div>
-
-            
-              
-            
-     
             </div>
           </div>
       </div>
       </>
-   
   )
 }
-
 export default Search

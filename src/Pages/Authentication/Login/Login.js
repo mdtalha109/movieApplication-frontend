@@ -68,12 +68,14 @@ const Login = () => {
           toast.warn('all fields are required', {
             autoClose: 2000,
           });
+          return;
           }
       
           if(password !== confirmPassword){
             toast.warn('Password not matched', {
               autoClose: 2000,
             });
+            return;
           }
 
           try {
@@ -99,7 +101,7 @@ const Login = () => {
             }
            
           } catch (error) {
-            // toast(error.response.data.error) 
+            toast(error.response.data.error) 
           }
     }
 

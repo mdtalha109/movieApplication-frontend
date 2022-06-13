@@ -39,7 +39,7 @@ const Home = () => {
             }
           }
     
-          const {data} = await axios.get('http://localhost:5000/api/list/getlist/public',config);
+          const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/public',config);
           console.log(data)
           
           setCreatedMovieListPublic({createdListPublic: data})
@@ -57,7 +57,7 @@ const Home = () => {
             }
           }
     
-          const {data} = await axios.get('http://localhost:5000/api/list/getlist/private',config);
+          const {data} = await axios.get('https://movie-app-pro.herokuapp.com/api/list/getlist/private',config);
        
           setCreatedMovieList({createdList: data})
           fetchMovieListPublic();
@@ -83,7 +83,7 @@ const Home = () => {
       toast('Wait, Creating List', {
         autoClose: 1000,
       });
-      const {data} = await axios.post('http://localhost:5000/api/list/createList', {movieListName:newListName, isPublic: view}, config)
+      const {data} = await axios.post('https://movie-app-pro.herokuapp.com/api/list/createList', {movieListName:newListName, isPublic: view}, config)
       console.log(data.createdList);
 
       if(data.createdList.isPublic){
